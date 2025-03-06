@@ -1,0 +1,146 @@
+  /* 
+    Name: Bach Kim Nguyen Hoang  
+    File: MedicalFormStyle.css
+    Date Created: 2024-02-07
+    Date Updated: 2024-02-14
+    Version: 1.04
+    Description: MIS 7375 Homework 1 learning HTML and creating a form.
+ */
+body {
+  background-color: rgb(72, 108, 201);
+  font-family: "Source Sans Pro", sans-serif;
+}
+tbody {
+  background-color: rgb(72, 108, 201);
+}
+.miracle-care-font {
+  font-family: 'Times New Roman', Times, serif, sans-serif; 
+  font-size: 45px;
+  font-weight: bold; 
+  font-style: italic;
+  text-align: center;
+  color: rgb(47, 202, 237);
+}
+.today-date {
+  font-family: 'Times New Roman', Times, serif, sans-serif; 
+  font-size: 20px;
+  font-weight: bold; 
+  text-align: right;
+  color: rgb(47, 202, 237);
+}
+h1 {
+  text-align: right;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: normal;
+  color: rgb(12, 1, 1);
+}
+#logo {
+  width: 140px;
+  height: auto;
+}
+table.form, tr.form, td.form {
+width: 100%;
+font-family: "Myriad Pro", arial, Helvetica, sans-serif;
+background-color:rgba(255, 255, 255, 0.897);
+padding: 0px;
+border-spacing: 00px;
+color:rgb(47, 202, 237);
+}
+th.form {
+font-family: "Myriad Pro", arial, Helvetica, sans-serif;
+background-color:rgb(47, 202, 237);
+font-size: 30px;
+padding: 20px;
+border-spacing: 20px;
+color:rgb(255, 255, 255);
+margin-left: auto;
+margin-right: auto;
+}
+input[type="button"], input[type="submit"], input[type="reset"] {
+  background-color: rgb(47, 202, 237); /* Change this to your desired background color */
+  color: white; /* Change this to your desired text color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+}
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+  background-color: #0056b3; /* Change this to your desired hover background color */
+}
+table.output, tr.output, td.output {
+width: 70%;
+opacity: 0.9;
+font-family: "Myriad Pro", arial, Helvetica, sans-serif;
+background-color:green;
+padding: 2px;
+border-spacing: 2px;
+color:rgb(255, 255, 255);
+}
+td.outputdata {
+width: 70%;
+opacity: 0.9;
+font-family: "Myriad Pro", arial, Helvetica, sans-serif;
+background-color:white;
+padding: 2px;
+border-spacing: 2px;
+color:black;
+}
+.textsize1 
+{
+  width:10px
+}
+.textsize5 
+{
+  width:40px
+}
+.social-media {
+  margin-top: 10px;
+}
+#footer p {
+  color: rgb(47, 202, 237);
+  font-family: "Myriad Pro", arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
+#footer ul {
+  list-style-type: none; 
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+#footer ul li {
+  display: inline;
+  color: rgb(47, 202, 237); 
+}
+#footer ul li a {
+  color: rgb(47, 202, 237); 
+  text-decoration: none;
+}
+#footer ul li a:hover {
+  text-decoration: underline;
+}
+#footer button {
+  background-color: rgb(47, 202, 237); /* Change this to your desired background color */
+  color: rgb(0, 0, 0); /* Change this to your desired text color */
+  border: none;
+  padding: 10px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#footer button:hover {
+  background-color: #0056b3; /* Change this to your desired hover background color */
+}
+.social-icon {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  vertical-align: middle;
+  background-color: rgb(47, 202, 237);
+}
+/* References: 
+https://profjake.w3spaces.com/MIS3371/homework3.html
+ */
