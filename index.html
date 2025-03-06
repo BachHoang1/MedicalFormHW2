@@ -1,7 +1,7 @@
 <!doctype html>
 <!-- 
     Name: Bach Kim Nguyen Hoang  
-    File: homework1.html
+    File: index.html
     Date Created: 2024-02-07
     Date Updated: 2024-02-14
     Version: 1.04
@@ -86,13 +86,14 @@
             <span id="lastname"></span> 
         </td>
         <td align="left">
+            <body onload="setup(); setMaxDate();"></body>
             <label for="dob">Date of Birth</label>
             <input type="date" 
                     id="dob" 
                     name="dob" 
-                    max="2025-02-17"
+                    max=""
                     required
-                    > <!-- Change with the .js later-->
+                    >
             <span id="dobdate"></span> 
         </td>
         <td align="left">
@@ -568,21 +569,10 @@
 <!-- Show entered form data -->
 <p id="outputformdata"></p>
 
+
 <!-- Load external JavaScript -->
  <!--placeholder-->
-<script src="homework3.js"></script>
-        
- <script>
-    const d = new Date();
-    let text = d.toLocaleDateString();
-    document.getElementById("today").innerHTML = text;
-
-    function setMaxDate() {
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('dob').setAttribute('max', today);
-    }
-    
-</script>
+<script src="homework2.js"></script>
 
 <!-- Footer section -->
 <div id="footer" style="text-align: center; margin-top: 20px;">
@@ -629,7 +619,7 @@
 </div>
 
 </body>
-<!-- End of file: homework1.html -->
+<!-- End of file: index.html -->
 </html>
 
 <!-- References: 
