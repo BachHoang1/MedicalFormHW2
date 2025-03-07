@@ -14,14 +14,75 @@ function setup()
     console.log(error_flag);
   }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('dob').setAttribute('max', today);
-  const minDate = new Date();
-  minDate.setFullYear(minDate.getFullYear() - 1);
-  document.getElementById('dob').setAttribute('min', minDate.toISOString().split('T')[0]);
-});
+/*
+dob function
+This function checks the date of birth field to make sure it is a valid date.
+*/
+  document.addEventListener('DOMContentLoaded', (event) => {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('dob').setAttribute('max', today);
+    const minDate = new Date();
+    minDate.setFullYear(minDate.getFullYear() - 120);
+    document.getElementById('dob').setAttribute('min', minDate.toISOString().split('T')[0]);
 
+    const dobInput = document.getElementById('dob');
+    const dateError = document.getElementById('date-error');
+
+    dobInput.addEventListener('change', () => {
+        const dobValue = new Date(dobInput.value);
+        if (dobValue > new Date(today) || dobValue < minDate) {
+            dateError.style.display = 'inline';
+        } else {
+            dateError.style.display = 'none';
+        }
+    });
+
+    const ssnDisplayInput = document.getElementById('ssn-display');
+    const ssnHiddenInput = document.getElementById('ssn');
+    const ssnError = document.getElementById('ssn-error');
+    
+    ssnDisplayInput.addEventListener('input', () => {
+        let value = ssnDisplayInput.value.replace(/\D/g, ''); // Remove all non-digit characters
+        let formattedValue = '';
+        let obscuredValue = '';
+
+        if (value.length > 3 && value.length <= 5) {
+            formattedValue = value.substr(0, 3) + '-' + value.substr(3);
+            obscuredValue = '***-**-' + value.substr(3);
+        } else if (value.length > 5) {
+            formattedValue = value.substr(0, 3) + '-' + value.substr(3, 2) + '-' + value.substr(5, 4);
+            obscuredValue = '***-**-' + value.substr(5, 4);
+        } else {
+            formattedValue = value;
+            obscuredValue = value;
+        }
+
+        ssnDisplayInput.value = formattedValue;
+        ssnHiddenInput.value = value;
+        
+        const regex = /^\d{3}-\d{2}-\d{4}$/;
+        if (!regex.test(formattedValue)) {
+            ssnError.style.display = 'inline';
+        } else {
+            ssnError.style.display = 'none';
+        }
+    });
+});
+/*
+Slider function
+This function sets up the slider for the self rate field.
+*/
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const selfRateSlider = document.getElementById('self_rate');
+  const selfRateOutput = document.getElementById('feeling_scale');
+
+  selfRateOutput.innerHTML = selfRateSlider.value;
+
+  selfRateSlider.oninput = function() {
+      selfRateOutput.innerHTML = this.value;
+  }
+});
 
 /* 
 This subroutine simply retrieves the data names and entered data from the form.

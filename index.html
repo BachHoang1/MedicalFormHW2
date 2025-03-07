@@ -47,8 +47,8 @@
                     size="10" 
                     maxlength="30" 
                     id="firstname" 
-                    pattern="[A-Z^a-z-' ^~]{2,}"
                     name="firstname"
+                    pattern="[A-Z^a-z-' ^~]{2,}"
                     required 
                     oninvalid="this.setCustomValidity('First Name not valid.')"
                     oninput="this.setCustomValidity('')"
@@ -58,12 +58,11 @@
             >
             <span id="firstname"></span>        
             <input type="text" 
-                    class="textsize1" 
                     size="1"
-                    pattern="[A-Z^a-z ]{0,}"
                     maxlength="1" 
-                    id="middleinit" 
-                    name="middleinit" 
+                    id="middleinit"
+                    name="middleinit"
+                    pattern="^[A-Za-z'-]+$"
                     onblur="checkmiddle()"
                     oninvalid="this.setCustomValidity('Letters only please.')"
                     oninput="this.setCustomValidity('')"
@@ -74,7 +73,7 @@
                     size="10" 
                     maxlength="30" 
                     id="lastname" 
-                    pattern="[A-Z^a-z-' ^~]{2,}"
+                    pattern="^[a-zA-Z]+$"
                     name="lastname"
                     required 
                     oninvalid="this.setCustomValidity('Last Name not valid.')"
@@ -94,6 +93,7 @@
                     max=""
                     required
                     >
+            <span class="error" id="date-error">Date must be within the valid range.</span>
             <span id="dobdate"></span> 
         </td>
         <td align="left">
@@ -138,7 +138,8 @@
                     oninvalid="this.setCustomValidity('e-Mail not valid.')"
                     oninput="this.setCustomValidity('')"
             >
-            <span id="phone_text">  
+            <span class="error" id="email-error">Invalid email format.
+            <span id="e-mail">  
         </td>
         <td align="left">
             <label for="phone">Phone #</label>
@@ -280,6 +281,12 @@
                     placeholder="00000"
             >
             <span id="city_text"> <span id="state_text">
+        <td align="left">    
+            <label for="ssn-display">Social Security Number:</label>
+            <input type="text" id="ssn-display" maxlength="11" required>
+            <input type="hidden" id="ssn" name="ssn">
+            <span class="error" id="ssn-error">Invalid SSN format.</span>
+        </td>
         </td> 
     </tr>
     <!-- Radio buttons for new patient, insurance, and vaccination -->
@@ -331,125 +338,133 @@
     </tr>
     <br>
     <!-- Checkboxes for conditions, activities, and family history -->
-    <tr class="form">
+    <table class="form">
         <td align="left">
-            <label for="condition">Do you have these conditon?</label>
-            <br>
+            <tr>
+                <th>Do you have these conditon?</th>
+                <th>Do you engage in any of the following activities</th>
+                <th>Does anyone in your family have a history of the following conditions?</th>
+            </tr>
+            <tr>
+                <th>
                 <input type="checkbox" 
-                        id="diabetes" 
-                        name="diabetes"
+                    id="diabetes" 
+                    name="diabetes"
                 >Diabetes
-                <br>
-                <label for="hypertension"></label>
+                </th>
+                <th>
                 <input type="checkbox" 
-                        id="hypertension" 
-                        name="hypertension"
+                    id="smoking" 
+                    name="smoking"
+                >Smoking
+                </th>
+                <th>
+                <input type="checkbox" 
+                    id="family_heart_disease" 
+                    name="family_heart_disease"
+                >Heart Disease
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" 
+                    id="hypertension" 
+                    name="hypertension"
                 >Hypertension
-                <br>
-                <label for="heart_disease"></label>
-                <input type="checkbox" 
+                </th>
+                <th>
+                    <input type="checkbox" 
+                    id="alcohol_consumption" 
+                    name="alcohol_consumption"
+                >Alcohol Consumption
+                </th>
+                <th>
+                    <input type="checkbox" 
+                    id="family_stroke" 
+                    name="family_stroke"
+                >Stroke
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" 
                         id="heart_disease" 
                         name="heart_disease"
                 >Heart Disease
-                <br>
-                <label for="asthma"></label>
-                <input type="checkbox" 
-                        id="asthma" 
-                        name="asthma"
-                >Asthma
-                <br>
-                <label for="allergies"></label>
-                <input type="checkbox" 
-                        id="allergies" 
-                        name="allergies"
-                >Allergies
-                <br>
-                <label for="cancer"></label>
-                <input type="checkbox" 
-                        id="cancer" 
-                        name="cancer"
-                >Cancer
-            <br>
-            <span id="condition_box">
-        </td>
-        <td align="left">
-            <label for="activities">Do you engage in any of the following activities</label>
-        <br>
-            <input type="checkbox" 
-                    id="smoking" 
-                    name="smoking"
-            >Smoking
-            <br>
-            <input type="checkbox" 
-                    id="alcohol_consumption" 
-                    name="alcohol_consumption"
-            >Alcohol Consumption
-            <br>
-            <input type="checkbox" 
+                </th>
+                <th>
+                    <input type="checkbox" 
                     id="regular_exercise" 
                     name="regular_exercise"
-            >Regular Exercise
-            <br>
-            <input type="checkbox" 
-                    id="special_diet" 
-                    name="special_diet"
-            >Special Diet
-            <br>
-            <input type="checkbox" 
-                    id="recreational_drug_use" 
-                    name="recreational_drug_use"
-            >Recreational Drug Use
-            <br>
-            <span id="activities_box">
-        </td>
-        <td align="left">
-            <label for="family">Does anyone in your family have a history of the following conditions?</label>
-        <br>
-            <input type="checkbox" 
-                    id="family_heart_disease" 
-                    name="family_heart_disease"
-            >Heart Disease
-            <br>
-            <input type="checkbox" 
-                    id="family_stroke" 
-                    name="family_stroke"
-            >Stroke
-            <br>
-            <input type="checkbox" 
+                >Regular Exercise
+                </th>
+                <th>
+                    <input type="checkbox" 
                     id="family_cancer" 
                     name="family_cancer"
-            >Cancer
-            <br>
-            <input type="checkbox" 
+                >Cancer
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" 
+                        id="asthma" 
+                        name="asthma"
+                    >Asthma
+                </th>
+                <th>
+                    <input type="checkbox" 
+                    id="special_diet" 
+                    name="special_diet"
+                    >Special Diet
+                </th>
+                <th>
+                    <input type="checkbox" 
                     id="family_diabetes" 
                     name="family_diabetes"
-            >Diabetes
-            <br>
-            <input type="checkbox" 
+                    >Diabetes
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" 
+                        id="allergies" 
+                        name="allergies"
+                    >Allergies
+                </th>
+                <th>
+                    <input type="checkbox" 
+                    id="recreational_drug_use" 
+                    name="recreational_drug_use"
+                    >Recreational Drug Use
+                </th>
+                <th>
+                    <input type="checkbox" 
                     id="family_mental_health_disorders" 
                     name="family_mental_health_disorders"
-            >Mental Health Disorders
-            <br>
-            <span id="family_box">
+                    >Mental Health Disorders
+                </th>
+            </tr>
+            <span id="condition_box">
         </td>
-    </tr>
+    </table>
 <!-- range scale-->
 <tr class="form">
-        <td align="right">
-            <label for="self_rate">On a scale of 1 to 10, 10 being feeling good, Rate your health?</label>
-        </td>
-        <td align="center">&nbsp;1
-            <input type="feeling_scale" 
+    <td align="right">
+        <label for="self_rate">On a scale of 1 to 10, 10 being feeling good, Rate your health?</label>
+    </td>
+    <td align="center">&nbsp;1
+        <input type="range" 
                     class="slider"
                     id="self_rate" 
                     name="self_rate"
                     min="1"
                     max="10"
                     list="increments"
-            > 
-            10&nbsp;<br>
-            <span id="feeling_scale"></span>
-         <datalist id="increments">
+        > 
+        10&nbsp;<br>
+        You feeling like a <span id="feeling_scale"></span>
+        <datalist id="increments">
                     <option value="1"></option>
                     <option value="2"></option>
                     <option value="3"></option>
@@ -460,35 +475,26 @@
                     <option value="8"></option>
                     <option value="9"></option>
                     <option value="10"></option>
-                </datalist>
-        </td>
-    </tr>
-    
-<script>
-    var slider = document.getElementById("budget");
-    var output = document.getElementById("rangedisplay");
-    output.innerHTML = slider.value;
-
-    slider.oninput = function() {
-        output.innerHTML = this.value;
-    }
-</script>
+        </datalist>
+    </td>
+</tr>
 <!-- Textarea for description -->
 <tr  class="form">
-        <td align="right">
-            <label for="description">Describle your condition</label>
-        </td>
+    <td align="right">
+        <label for="description">Describle your condition</label>
+    </td>
         <td>
-            <textarea rows="4" 
+        <textarea rows="4" 
                     cols="50" 
                     maxlength="500"
                     id="description" 
                     name="description"
                     pattern="[A-Za-z]+[A-Za-z0-9-_]{8,}"
                     placeholder="(Give us some more details...)" 
-            ></textarea>
-            <span id="description_text">
-        </td>
+        ></textarea>
+        <span id="description_text">
+    </td>
+</tr>
         <tr class="form">
             <td align="right">
                 <label for="userid">User ID</label>
@@ -550,6 +556,22 @@
                 >
                 <span id="password2_text">  
             </td>
+        </tr>
+        <!-- Password message area -->
+        <tr class="form">
+            <td>&nbsp</td><td id="password_message1">&nbsp</td>
+        </tr>
+        <tr class="form">
+            <td>&nbsp</td><td id="password_message2">&nbsp</td>
+        </tr>
+        <tr class="form">
+            <td>&nbsp</td><td id="password_message3">&nbsp</td>
+        </tr>
+        <tr class="form">
+            <td>&nbsp</td><td id="password_message4">&nbsp</td>
+        </tr>
+        <tr class="form">
+            <td>&nbsp</td><td id="password_message5">&nbsp</td>
         </tr>
 </tr>
     <tr>        

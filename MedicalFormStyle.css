@@ -141,6 +141,11 @@ color:black;
   vertical-align: middle;
   background-color: rgb(47, 202, 237);
 }
+.error {
+  color: red;
+  display: none;
+}
+
 /* References: 
 https://profjake.w3spaces.com/MIS3371/homework3.html
  */
