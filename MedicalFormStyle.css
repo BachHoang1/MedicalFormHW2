@@ -145,7 +145,31 @@ color:black;
   color: red;
   display: none;
 }
+.feeling-low {
+  color: red;
+}
 
+.feeling-medium {
+  color: orange;
+}
+
+.feeling-high {
+  color: green;
+}
+.styled-button {
+  background-color: rgb(47, 202, 237); /* Change this to your desired background color */
+  color: white; /* Change this to your desired text color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.styled-button:hover {
+  background-color: #0056b3; /* Darker green on hover */
+}
 /* References: 
 https://profjake.w3spaces.com/MIS3371/homework3.html
  */

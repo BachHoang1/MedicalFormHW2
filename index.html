@@ -32,7 +32,6 @@
         </div>
         <div id="body">
             <!--thankyou.html-->
-<form name="signup" id="signup" onreset="removedata1()" action="thankyou.html.html">
     <table class="form">
     <tr class="form">
         <th class="form" colspan="3">Patient Form</Form></th>
@@ -48,32 +47,34 @@
                     maxlength="30" 
                     id="firstname" 
                     name="firstname"
-                    pattern="[A-Z^a-z-' ^~]{2,}"
+                    pattern="[A-Za-z'-]{1,30}$"
                     required 
-                    oninvalid="this.setCustomValidity('First Name not valid.')"
-                    oninput="this.setCustomValidity('')"
+                    oninvalid="checkfirstname()"
+                    oninput="checkfirstname()"
                     onblur="checkfirstname()"
                     placeholder="John (req'd)"
                     title="Minumum 2 characters; only letters, spaces, &quot-&quot and ' allowed."
             >
+            <span class="error" id="first-name-error">Invalid name letters, apostrophes, and dashes only</span>
             <span id="firstname"></span>        
             <input type="text" 
                     size="1"
                     maxlength="1" 
                     id="middleinit"
                     name="middleinit"
-                    pattern="^[A-Za-z'-]+$"
-                    onblur="checkmiddle()"
+                    pattern="^[A-Za-z]{0,1}$"
+                    oninput="checkmiddle()"
                     oninvalid="this.setCustomValidity('Letters only please.')"
                     oninput="this.setCustomValidity('')"
                     placeholder="Q"
             >
+            <span class="error" id="middle-name-error">Invalid name letters, apostrophes, and dashes only</span>
             <span id="middleinit"></span>   
             <input type="text" 
                     size="10" 
                     maxlength="30" 
                     id="lastname" 
-                    pattern="^[a-zA-Z]+$"
+                    pattern="[A-Za-z'-]{1,30}$"
                     name="lastname"
                     required 
                     oninvalid="this.setCustomValidity('Last Name not valid.')"
@@ -82,7 +83,24 @@
                     placeholder="lastname (req'd)"
                     title="Minumum 2 characters; only letters, spaces, &quot-&quot and ' allowed."
             >
+            <span class="error" id="last-name-error">Invalid name letters, apostrophes, and dashes only</span>
             <span id="lastname"></span> 
+            <label for="suffix">Suffix:</label>
+            <select required name="suffix"
+            id="suffix"
+            default="None"
+            required>
+                <option value=" ">None</option>
+                <option value="Jr.">Jr.</option>
+                <option value="Sr.">Sr.</option>
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">III</option>
+                <option value="V">III</option>
+                <option value="Ph.D.">Ph.D.</option>
+                <option value="M.D.">M.D.</option>
+            <span id="suffix"></span> 
         </td>
         <td align="left">
             <body onload="setup(); setMaxDate();"></body>
@@ -122,7 +140,8 @@
                     onblur="checkaddr1()"
                     oninvalid="this.setCustomValidity('At least 1 address line Required')"
                     oninput="this.setCustomValidity('')"
-                    placeholder="1234 Main St (req'd)">  
+                    placeholder="1234 Main St (req'd)">
+            <span class="error" id="address1-error">Invalid address</span>          
             <span id="addr1_text"></span>
         </td>
         <td align="left">
@@ -133,12 +152,12 @@
                     id="email" 
                     name="email" 
                     placeholder="john@xyz.com"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                     required 
                     oninvalid="this.setCustomValidity('e-Mail not valid.')"
                     oninput="this.setCustomValidity('')"
             >
-            <span class="error" id="email-error">Invalid email format.
+            <span class="error" id="email-error">Invalid email format.</span>
             <span id="e-mail">  
         </td>
         <td align="left">
@@ -148,10 +167,12 @@
                     maxlength="13" 
                     id="phone" 
                     name="phone" 
-                    placeholder="(713)555-1212"
+                    placeholder="000-000-0000"
+                    oninput="formatPhoneNumber(this)"
                     pattern="^(\+?\d{1,3}[-.\s]?)?(\(\d{1,4}\)|\d{1,4})[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
                     required
             >
+            <span class="error" id="phone-error">Invalid phone number.</span>
             <span id="phone_text">  
         </td>
     </tr>
@@ -166,6 +187,7 @@
                     name="addr2" 
                     placeholder="Apt #, etc..."
             >
+            <span class="error" id="address2-error">Invalid address</span> 
             <span id="addr2_text"></span>
         </td>
         <td align="left">
@@ -192,7 +214,8 @@
                     maxlength="13" 
                     id="phone" 
                     name="phone" 
-                    placeholder="(713)555-1212"
+                    placeholder="000-000-0000"
+                    oninput="formatPhoneNumber(this)"
                     pattern="^(\+?\d{1,3}[-.\s]?)?(\(\d{1,4}\)|\d{1,4})[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"
                     required
             >
@@ -215,6 +238,7 @@
                     oninput="this.setCustomValidity('')"
                     placeholder="Anytown (req'd)"
             >
+            <span class="error" id="city-error">Invalid City</span> 
             <select required name="state" id="state" onblur="checkstate()" required>
                 <option value=""></option>
                 <option value="AL">Alabama</option>
@@ -280,15 +304,15 @@
                     oninput="this.setCustomValidity('')"
                     placeholder="00000"
             >
-            <span id="city_text"> <span id="state_text">
-        <td align="left">    
-            <label for="ssn-display">Social Security Number:</label>
-            <input type="text" id="ssn-display" maxlength="11" required>
-            <input type="hidden" id="ssn" name="ssn">
-            <span class="error" id="ssn-error">Invalid SSN format.</span>
-        </td>
+            <span class="error" id="zip-error">Invalid Zip Code</span> 
+            <span id="city_text"> <span id="state_text"> 
+            <td align="left">    
+                <label for="ssn">SSN:</label>
+                <input type="password" id="ssn" name="ssn" maxlength="9" pattern="^\d{9}$" placeholder="XXX-XX-XXXX">
+            </td>
         </td> 
     </tr>
+
     <!-- Radio buttons for new patient, insurance, and vaccination -->
     </tr class="form">
         <tr class="form">
@@ -298,11 +322,13 @@
                             id="new_patient" 
                             name="new_patient" 
                             value="Yes"
+                            required
                     >Yes
                     <input type="radio" 
                             id="new_patient" 
                             name="new_patient" 
                             value="No"
+                            required
                     >No
                 <span id="new_patient"></span>
             </td>
@@ -312,11 +338,13 @@
                         id="insuranced" 
                         name="insuranced" 
                         value="Yes"
+                        required
                 >Yes
                 <input type="radio" 
                         id="insuranced" 
                         name="insuranced" 
                         value="No"
+                        required
                 >No
                 <span id="insuranced"></span>
             </td>
@@ -326,11 +354,13 @@
                             id="vaccinated" 
                             name="vaccinated" 
                             value="Yes"
+                            required
                     >Yes
                     <input type="radio" 
                             id="vaccinated" 
                             name="vaccinated" 
                             value="No"
+                            required
                     >No
                 <span id="vaccinated"></span>
             </td>
@@ -447,38 +477,43 @@
             </tr>
             <span id="condition_box">
         </td>
+
+        <tr class="form">
+            <td align="center">
+                <label for="self_rate">On a scale of 1 to 10, 10 being feeling good, Rate your health?</label>
+            </td>
+            <td align="center">&nbsp;1
+                <input type="range" 
+                            class="slider"
+                            id="self_rate" 
+                            name="self_rate"
+                            min="1"
+                            max="10"
+                            list="increments"
+                > 
+                10&nbsp;<br>
+                <label for="how_you_feel"> You feeling like a </label>
+                <span id="feeling_scale"></span>
+                <datalist id="increments">
+                            <option value="1"></option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                            <option value="4"></option>
+                            <option value="5"></option>
+                            <option value="6"></option>
+                            <option value="7"></option>
+                            <option value="8"></option>
+                            <option value="9"></option>
+                            <option value="10"></option>
+                </datalist>
+            </td>
+        </tr>
     </table>
 <!-- range scale-->
-<tr class="form">
-    <td align="right">
-        <label for="self_rate">On a scale of 1 to 10, 10 being feeling good, Rate your health?</label>
-    </td>
-    <td align="center">&nbsp;1
-        <input type="range" 
-                    class="slider"
-                    id="self_rate" 
-                    name="self_rate"
-                    min="1"
-                    max="10"
-                    list="increments"
-        > 
-        10&nbsp;<br>
-        You feeling like a <span id="feeling_scale"></span>
-        <datalist id="increments">
-                    <option value="1"></option>
-                    <option value="2"></option>
-                    <option value="3"></option>
-                    <option value="4"></option>
-                    <option value="5"></option>
-                    <option value="6"></option>
-                    <option value="7"></option>
-                    <option value="8"></option>
-                    <option value="9"></option>
-                    <option value="10"></option>
-        </datalist>
-    </td>
-</tr>
+
 <!-- Textarea for description -->
+</table> 
+<table class="form">
 <tr  class="form">
     <td align="right">
         <label for="description">Describle your condition</label>
@@ -507,12 +542,11 @@
                         id="userid" 
                         pattern="[A-Za-z]+[A-Za-z0-9-_]{8,}"
                         name="firstname"
-                        required 
-                        oninvalid="this.setCustomValidity('Invalid User ID. Enter letters, numbers, dash or underscores. 1st character must be a letter.')"
-                        oninput="this.setCustomValidity('')"
+                        required
                         placeholder="(Req'd)"
                         title="Minumum 5 characters; no spaces or 'special' characters."
                 >
+                <span class="error" id="userid-error">Invalid User ID. Enter letters, numbers, dash or underscores. 1st character must be a letter.</span>
                  <span id="userid_text">  
             </td>
         <tr class="form">
@@ -573,14 +607,18 @@
         <tr class="form">
             <td>&nbsp</td><td id="password_message5">&nbsp</td>
         </tr>
-</tr>
+        <tr class="form">
+            <td>&nbsp</td><td id="password_message6">&nbsp</td>
+        </tr>
+    </tr>
+</table>
     <tr>        
         <td colspan="3">
             <center>
                 <!--Modify with .js later-->
-            <input type="button" id="check" value="Check your input" onclick="window.location.href='thankyou.html'">
-            <input type="submit" id="submit" value="Send the Form" onclick="window.location.href='thankyou.html'">
-            <input type="reset" id="rest" value="Clear and Start over" onclick="window.location.href='thankyou.html'">
+            <button class = "styled-button" id="check2">Check your input</button>
+            <input type="submit" id="submit" value="Send the Form" disabled onclick="window.location.href='thankyou.html'">
+            <input type="reset" id="rest" value="Clear and Start over" onclick="resetForm()">
             </center>
         </td>
     <tr>
