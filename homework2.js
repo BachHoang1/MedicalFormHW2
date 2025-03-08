@@ -528,28 +528,7 @@ submitButton.addEventListener('click', function() {
           document.getElementById("submit").disabled = false;
         }
 });
-
-// Check everything
-    function checkform() 
-      {
-        error_flag = "0";
-        checkfirstname();
-        checkmiddle();
-        checklastname();
-        checkaddr1();
-        checkaddr2();
-        // etc...
-        passwordentry();
-        console.log("Error flag: "+error_flag);
-        if (error_flag == "1")
-        {
-          alert("Please fix the indicated errors!");
-        }
-        else {
-          document.getElementById("submit").disabled = false;
-        }
-      }
-    /* End of document: homework3.js */
+/* End of document: homework3.js */
 /* References: 
 https://profjake.w3spaces.com/MIS3371/homework3.html
  */
